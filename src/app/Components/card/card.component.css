@@ -1,4 +1,26 @@
 .card {
     width: 18rem;
     height: 24rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.card.small {
+    width: 13.5rem;
+    height: 18rem;
+}
+
+.card.black {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.card .card-body {
+    padding: 0.5rem;
+}
+
+.enabled {
+    cursor: pointer;
 }
