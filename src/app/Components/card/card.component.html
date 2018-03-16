@@ -1,31 +1,33 @@
 <div class="card m-3" [ngClass]="
 {
     'small':    small,
-    'black':    card != undefined && card.isBlackCard,
+    'black':    card != null && card.isBlackCard,
     'enabled':  !disabled && !muted,
     'mt-5':     !disabled
 }"
 [@selected]="
 {
-    value:  card != undefined && card.isSelected,
+    value:  card != null && card.isSelected,
     params: { backgroundColor: backgroundColor }
 }
 "
-    (@selected.start)="animationStart($event)" (@selected.done)="animationEnd($event)" (click)="clicked($event)">
+    (@selected.start)="animationStart($event)" (@selected.done)="animationEnd($event)" (click)="clicked($event)" (contextmenu)="rightclicked($event)">
     <div class="card-body d-flex flex-column justify-content-start">
         <div class="top mb-auto">
             <h4 class="card-title">
-                <span [innerHtml]="card != undefined ? card.text : 'CARD_TEXT'"></span>
+                <ng-container *ngIf="editMode; then edit else display"></ng-container>
+                <ng-template #display><span [innerHtml]="card != null ? card.isBlankCard && card.customText != '' ? card.customText : card.text : 'CARD_TEXT'"></span></ng-template>
+                <ng-template #edit><textarea [(ngModel)]="card.customText" appAutofocus (blur)="save($event)" (keydown.enter)="save($event)"></textarea></ng-template>
             </h4>
         </div>
         <div class="bottom">
             <div>
-                <ng-container *ngIf="card != undefined && card.isBlackCard; then showDrawValue"></ng-container>
+                <ng-container *ngIf="card != null && card.isBlackCard; then showDrawValue"></ng-container>
                 <ng-template #showDrawValue><span class="font-weight-bold">Draw:&nbsp;</span><span>{{ draw }}</span></ng-template>
             </div>
             <div>
-                <ng-container *ngIf="card != undefined && card.isBlackCard; then showPickValue"></ng-container>
-                <ng-container *ngIf="card != undefined && !card.isBlackCard && showPickOrder && pickOrder > 1; then showPickIndicator"></ng-container>
+                <ng-container *ngIf="card != null && card.isBlackCard; then showPickValue"></ng-container>
+                <ng-container *ngIf="card != null && !card.isBlackCard && showPickOrder && pickOrder > 1; then showPickIndicator"></ng-container>
 
                 <ng-template #showPickValue><span class="font-weight-bold">Pick:&nbsp;</span><span>1</span></ng-template>
                 <ng-template #showPickIndicator>
@@ -36,8 +38,10 @@
                     </span>
                 </ng-template>
 
-                <ng-template #isStatic><span class="float-right">{{ card != undefined ? card.watermark : "WM" }}</span></ng-template>
-                <ng-template #isEditable><span class="float-right"><i class="fa fa-pencil float-right"></i></span></ng-template>
+                <ng-container *ngIf="card != null && card.isBlankCard; then isEditable else isStatic"></ng-container>
+
+                <ng-template #isStatic><span class="float-right">{{ card != null ? card.watermark : "WM" }}</span></ng-template>
+                <ng-template #isEditable><span class="float-right"><span class="edit-help font-italic">Right click to edit...&nbsp;</span><i class="fa fa-pencil float-right"></i></span></ng-template>
             </div>
         </div>
     </div>

@@ -24,3 +24,23 @@
 .enabled {
     cursor: pointer;
 }
+
+.card-title, .card-title > textarea {
+    width: 100%;
+    height: 100%;
+}
+
+.card-title > textarea {
+    border: none;
+    overflow: hidden;
+    resize: none;
+}
+
+.top {
+    height: 15rem;
+}
+
+.edit-help {
+    font-size: 0.8rem;
+    vertical-align: super;
+}

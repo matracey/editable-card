@@ -46,6 +46,8 @@ export class CardComponent implements OnInit {
 
     public supressSelect = false;
 
+    public editMode = false;
+
     public cardSelected = new EventEmitter<ICard>();
     public cardDeselected = new EventEmitter<ICard>();
 
@@ -85,7 +87,12 @@ export class CardComponent implements OnInit {
     }
 
     public clicked(event: MouseEvent): void {
-        if (this.card == null || this.card.isBlackCard || this.disabled || this.muted) { return; }
+        if (this.card == null || this.card.isBlackCard || this.disabled || this.muted || this.editMode) { return; }
+
+        if (this.card.isBlankCard && this.card.customText === "") {
+            this.editMode = true;
+            return;
+        }
 
         if (this.card.isSelected) {
             this.cardDeselected.emit(this.card);
@@ -96,6 +103,22 @@ export class CardComponent implements OnInit {
         if (!this.supressSelect) {
             this.toggle();
         }
+    }
+
+    public rightclicked(event: MouseEvent): boolean {
+        this.editMode = true;
+        return false;
+    }
+
+    public save(event: Event): boolean {
+        event.preventDefault();
+        if (this.card.customText !== "") {
+            this.card.isSelected = true;
+        } else {
+            this.card.isSelected = false;
+        }
+        this.editMode = false;
+        return false;
     }
 
     public animationStart(event: AnimationEvent) { }

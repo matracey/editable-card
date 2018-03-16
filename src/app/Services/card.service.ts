@@ -31,6 +31,7 @@ export class CardService {
             card.watermark = "___";
             card.isWriteIn = true;
             card.isBlankCard = true;
+            card.customText = "";
             card.isBlackCard = false;
             card.isSelected = false;
             card.sortOrder = 0;
