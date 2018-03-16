@@ -5,6 +5,8 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./Components/app//app.component";
 import { CardComponent } from "./Components/card/card.component";
 
+import { CardService } from "./Services/card.service";
+
 
 @NgModule({
     declarations: [
@@ -15,7 +17,9 @@ import { CardComponent } from "./Components/card/card.component";
         BrowserModule,
         BrowserAnimationsModule,
     ],
-    providers: [],
+    providers: [
+        CardService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

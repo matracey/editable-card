@@ -1,6 +1,7 @@
 import { ICard } from "./ICard";
 
 export interface IBlackCard extends ICard {
-    pick: number;
     draw: number;
+    pick: number;
+    sortOrder: number;
 }

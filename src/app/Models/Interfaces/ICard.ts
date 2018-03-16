@@ -1,7 +1,9 @@
 export interface ICard {
-    isBlackCard: boolean;
-    isSelected: boolean;
+    id: string;
     text: string;
     watermark: string;
+    sortOrder: number;
+    isBlackCard: boolean;
+    isSelected: boolean;
     pickOrder: number;
 }

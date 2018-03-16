@@ -80,18 +80,33 @@ export class CardComponent implements OnInit {
     public ngOnInit(): void {
         if (this.card != null && !this.card.isBlackCard) {
             const c = this.card as IWhiteCard;
-            if (c.isBlank) { console.log("Blank card."); }
+            if (c.isBlankCard) { console.log("Blank card."); }
         }
     }
 
-    public clicked(event: MouseEvent): void { }
+    public clicked(event: MouseEvent): void {
+        if (this.card == null || this.card.isBlackCard || this.disabled || this.muted) { return; }
+
+        if (this.card.isSelected) {
+            this.cardDeselected.emit(this.card);
+        } else {
+            this.cardSelected.emit(this.card);
+        }
+
+        if (!this.supressSelect) {
+            this.toggle();
+        }
+    }
 
     public animationStart(event: AnimationEvent) { }
 
     public animationEnd(event: AnimationEvent) { }
 
     private toggle(): void {
-        // handle select state change.
+        if (this.card == null || this.card.isBlackCard) { return; }
+
+        this.card.isSelected = !this.card.isSelected;
+        this.cardChange.emit(this.card);
     }
 
     private select(): void {

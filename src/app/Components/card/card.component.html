@@ -14,9 +14,9 @@
     (@selected.start)="animationStart($event)" (@selected.done)="animationEnd($event)" (click)="clicked($event)">
     <div class="card-body d-flex flex-column justify-content-start">
         <div class="top mb-auto">
-            <h1 class="card-title">
+            <h4 class="card-title">
                 <span [innerHtml]="card != undefined ? card.text : 'CARD_TEXT'"></span>
-            </h1>
+            </h4>
         </div>
         <div class="bottom">
             <div>
@@ -42,3 +42,5 @@
         </div>
     </div>
 </div>
+
+<pre>{{ card | json }}</pre>
