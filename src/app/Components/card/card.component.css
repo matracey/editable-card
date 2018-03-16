@@ -25,12 +25,12 @@
     cursor: pointer;
 }
 
-.card-title, .card-title > textarea {
+.card-title, .card-title>textarea {
     width: 100%;
     height: 100%;
 }
 
-.card-title > textarea {
+.card-title>textarea {
     border: none;
     overflow: hidden;
     resize: none;
@@ -43,4 +43,13 @@
 .edit-help {
     font-size: 0.8rem;
     vertical-align: super;
+}
+
+pre {
+    width: 24rem;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }

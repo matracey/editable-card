@@ -16,8 +16,11 @@
         <div class="top mb-auto">
             <h4 class="card-title">
                 <ng-container *ngIf="editMode; then edit else display"></ng-container>
-                <ng-template #display><span [innerHtml]="card != null ? card.isBlankCard && card.customText != '' ? card.customText : card.text : 'CARD_TEXT'"></span></ng-template>
-                <ng-template #edit><textarea [(ngModel)]="card.customText" appAutofocus (blur)="save($event)" (keydown.enter)="save($event)"></textarea></ng-template>
+                <ng-template #display><span [innerHtml]="card != null ? card.isBlankCard && customText != '' ? customText : card.text : 'CARD_TEXT'"></span></ng-template>
+                <ng-template #edit>
+                    <textarea class="form-control" [(ngModel)]="card.customText" appAutofocus (blur)="save($event)" (keydown.enter)="save($event)"></textarea>
+                    <small><label class="float-right" [ngClass]="{'text-danger': card.customText.length > maxLength}">{{ maxLength - card.customText.length }}</label></small>
+                </ng-template>
             </h4>
         </div>
         <div class="bottom">

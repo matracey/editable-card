@@ -46,7 +46,23 @@ export class CardComponent implements OnInit {
 
     public supressSelect = false;
 
-    public editMode = false;
+    // editable
+    private _editMode = false;
+    public get editMode(): boolean {
+        if (this.card == null || !this.card.isBlankCard) { return false; }
+        return this._editMode;
+    }
+    public set editMode(v: boolean) {
+        this._editMode = v;
+    }
+    public readonly maxLength = 140;
+
+    public get customText(): string {
+        if (this.card == null) { return null; }
+        return this.card.customText.substring(0, this.maxLength);
+    }
+
+    // end editable
 
     public cardSelected = new EventEmitter<ICard>();
     public cardDeselected = new EventEmitter<ICard>();
