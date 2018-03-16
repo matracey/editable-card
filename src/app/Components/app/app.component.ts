@@ -16,6 +16,6 @@ export class AppComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        this.card = this._cards.randomWhiteCard();
+        this.card = this._cards.getBlank();
     }
 }
