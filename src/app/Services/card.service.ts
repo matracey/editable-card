@@ -14,7 +14,7 @@ export class CardService {
     private _blankCards: IWhiteCard[];
 
     constructor() {
-        this._cards = data as any as ICardPack[];
+        this._cards = (data as any).default as ICardPack[];
 
         this._cards.forEach(p => p.whiteCards.forEach(c => {
             c.isSelected = false;
